@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- configuration file for LogBack (slf4J implementation) See here for more 
+	details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/ -->
+	
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<!-- Single place to set log level -->
+	<property name="LOG_LEVEL" value="trace" />
+
+	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+		<resetJUL>true</resetJUL>
+	</contextListener>
+
+	<!-- To enable JMX Management -->
+	<jmxConfigurator />
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%-5level %logger{0} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.springframework.core">
+		<level value='${LOG_LEVEL}' />
+	</logger>
+
+	<logger name="org.springframework.messaging">
+		<level value='${LOG_LEVEL}' />
+	</logger>
+
+	<!-- <logger name="org.springframework.beans">
+		<level value="info" />
+	</logger> -->
+
+	<!-- <logger name="org.springframework.context">
+		<level value='${LOG_LEVEL}' />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value='${LOG_LEVEL}' />
+	</logger>
+
+	<logger name="com.blogspot.sunitkatkar">
+		<level value='${LOG_LEVEL}' />
+	</logger>
+
+	<root level='${LOG_LEVEL}'>
+		<appender-ref ref="console" />
+	</root> -->
+	
+</configuration>
