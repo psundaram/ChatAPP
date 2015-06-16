@@ -698,6 +698,7 @@
                      stompClient.subscribe("/user/<%=session.getAttribute("userName")%>/groupInvite", function(message) {
                          //alert(message);
                     	 alert(message);
+                    	 groupInvitation(message);
           			});
            			
                    // stompClient.subscribe("/topic/displayusers", renderUser);
@@ -828,6 +829,32 @@
 	     // alert( $('#tabs a[href="#'+e+'"]'));
 	   $('#tabs a[href="#'+e+'"]').tab('show');   
    } */
+
+   function groupInvitation(message){
+	   var groupInv = JSON.parse(message.body);
+	   alert(groupInv.messageContent);
+	   var r = confirm(groupInv.messageContent);
+	    if (r == true) {
+	        console.log("Invitation accepted");
+	        $.ajax({
+           	 url: "joinGroup",
+           	  success: function(result){
+                  // alert(result);
+                   
+                }
+                });
+	    } else {
+	    	$.ajax({
+	           	 url: "decline",
+	           	  success: function(result){
+	                  // alert(result);
+	                   
+	                }
+	                });
+	       console.log("Invitation Rejected");
+	    }
+	   
+	   }
    
     function Chat_reply(e) {
 	   var activeClass = $('.tabs-panels .panel:visible').find('.my-chat');
@@ -910,7 +937,7 @@
      //  alert(user);
        var name = e.name;
        var text = e.content;
-       console.log("e typuing sttus");
+       console.log("e typing status");
        alert(name);
        alert(text);
        var activeClass = "";
@@ -955,6 +982,9 @@
        var text = e.message;
        var activeClass = "";
        var sessionUser = "<%=session.getAttribute("userName")%>";
+       alert("name:"+name);
+       alert("grou:"+ e.groupName);
+       alert(sessionUser);
        if(!(sessionUser==name))
            {
        if($('#tt').tabs('exists', e.groupName)){
