@@ -111,7 +111,7 @@ public class GroupChat implements PacketListener,InvitationListener{
         connection = connections.getConnection();
 //       muc = new MultiUserChat(connection, "testuser@conference.mouli");
 //       muc.join((String)request.getSession().getAttribute("userName"));
-        new MultiUserChat(connection, "testuser@conference.mouli").join((String)request.getSession().getAttribute("userName"));
+        new MultiUserChat(connection, "testuser@conference.mouli").decline(connection, "testuser@conference.mouli", "testuser", "No thanks");
     }
     
     @MessageMapping("/groupChat")
@@ -373,6 +373,9 @@ public class GroupChat implements PacketListener,InvitationListener{
                 e.printStackTrace();
             }
             System.out.println("Number of occupants:" + info.getOccupantsCount());
+            
+            System.out.println();
+            
             System.out.println("Room Subject:" + info.getSubject());
             
             System.out.println(getConnectedUsers(muc).size());
